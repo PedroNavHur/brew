@@ -19,6 +19,7 @@
 		</span>
 
 		to your new<br />SvelteKit app
+		<button class="btn btn-primary">Click me</button>
 	</h1>
 
 	<h2>
