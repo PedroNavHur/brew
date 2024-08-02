@@ -82,7 +82,6 @@
                   </label>
                   {#if form?.errors?.email}
                     <p class="my-4">
-                      There was an error!
                       {form?.errors?.email}
                     </p>
                   {/if}
@@ -102,9 +101,7 @@
                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                           />
                         </svg>
-                        <span
-                          >Your purchase has been confirmed! {form?.message}</span
-                        >
+                        <span>{form?.message}</span>
                       </div>
                     {:else}
                       <div role="alert" class="alert alert-warning my-4">
