@@ -2,9 +2,6 @@
   import welcome from "$lib/images/svelte-welcome.webp";
   import welcome_fallback from "$lib/images/svelte-welcome.png";
 
-  // export let data;
-  // $: ({ beans } = data);
-
   import { enhance } from "$app/forms";
   import type { ActionData, SubmitFunction } from "./$types.js";
 
@@ -67,19 +64,21 @@
             <form method="dialog">
               <form method="POST" use:enhance={handleSubmit}>
                 <div class="container">
-                  <label
-                    class="input input-bordered my-4 flex items-center gap-2"
-                    for="email"
-                    >Email
-                    <input
-                      id="email"
-                      name="email"
-                      class="grow"
-                      type="email"
-                      placeholder="email@site.com"
-                      value={form?.email ?? ""}
-                    />
-                  </label>
+                  {#if !form?.success}
+                    <label
+                      class="input input-bordered my-4 flex items-center gap-2"
+                      for="email"
+                      >Email
+                      <input
+                        id="email"
+                        name="email"
+                        class="grow"
+                        type="email"
+                        placeholder="email@site.com"
+                        value={form?.email ?? ""}
+                      />
+                    </label>
+                  {/if}
                   {#if form?.errors?.email}
                     <p class="my-4">
                       {form?.errors?.email}
@@ -122,9 +121,11 @@
                       </div>
                     {/if}
                   {/if}
-                  <button class="btn btn-accent my-4">
-                    {loading ? "Loading" : "Send magic link"}
-                  </button>
+                  {#if !form?.success}
+                    <button class="btn btn-accent my-4">
+                      {loading ? "Loading" : "Send magic link"}
+                    </button>
+                  {/if}
                 </div>
               </form>
             </form>

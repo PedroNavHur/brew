@@ -16,7 +16,9 @@ export const load: PageServerLoad = async ({
     .eq("id", session.user.id)
     .single();
 
-  return { session, profile };
+  const { data: beans } = await supabase.from("beans").select("*");
+
+  return { session, profile, beans };
 };
 
 export const actions: Actions = {
