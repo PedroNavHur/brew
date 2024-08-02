@@ -38,112 +38,109 @@
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">Brew Inventory</h1>
         <p class="py-6">
-          Keep track of the beans you love with Brew Inventory. Add, edit, and
-          delete your favorite beans.
+          Keep track of the beans you love with Brew Inventory.
+          <br />
+          Add, edit, and delete your favorite beans.
         </p>
-        <!-- Open the modal using ID.showModal() method -->
-        <button class="btn btn-primary" on:click={handleModal}>Get Started</button>
+
+        <button class="btn btn-primary" on:click={handleModal}
+          >Get Started</button
+        >
         <dialog
           bind:this={dialog}
           id="login_modal"
           class="modal modal-bottom sm:modal-middle"
         >
           <div class="modal-box">
-            <h3 class="text-lg font-bold">Hi! Sign in to keep track of your grounds!</h3>
-            <p class="py-4">Press ESC key or click the button below to close</p>
-            <div class="modal-action">
-              <form method="dialog">
-                <!-- if there is a button in form, it will close the modal -->
-                <button class="btn">Close</button>
+            <form method="dialog">
+              <button
+                class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2"
+                >✕</button
+              >
+            </form>
+            <h3 class="text-lg font-bold">
+              Hi! Sign in to keep track of your grounds!
+            </h3>
+            <p class="my-4">
+              No need for password, use a magic link with your email below
+            </p>
+            <form method="dialog">
+              <form method="POST" use:enhance={handleSubmit}>
+                <div class="container">
+                  <label
+                    class="input input-bordered my-4 flex items-center gap-2"
+                    for="email"
+                    >Email
+                    <input
+                      id="email"
+                      name="email"
+                      class="grow"
+                      type="email"
+                      placeholder="email@site.com"
+                      value={form?.email ?? ""}
+                    />
+                  </label>
+                  {#if form?.errors?.email}
+                    <p class="my-4">
+                      There was an error!
+                      {form?.errors?.email}
+                    </p>
+                  {/if}
+                  {#if form?.message !== undefined}
+                    {#if form?.success}
+                      <div role="alert" class="alert alert-success my-4">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6 shrink-0 stroke-current"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span
+                          >Your purchase has been confirmed! {form?.message}</span
+                        >
+                      </div>
+                    {:else}
+                      <div role="alert" class="alert alert-warning my-4">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-6 w-6 shrink-0 stroke-current"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                          />
+                        </svg>
+                        <span>Warning: {form?.message}</span>
+                      </div>
+                    {/if}
+                  {/if}
+                  <button class="btn btn-accent my-4">
+                    {loading ? "Loading" : "Send magic link"}
+                  </button>
+                </div>
               </form>
-            </div>
+            </form>
           </div>
         </dialog>
       </div>
     </div>
   </div>
 
-  <form class="row flex-center flex" method="POST" use:enhance={handleSubmit}>
-    <div class="col-6 form-widget">
-      <h1 class="header">Supabase + SvelteKit</h1>
-      <p class="description">Sign in via magic link with your email below</p>
-      {#if form?.message !== undefined}
-        <div class="success {form?.success ? '' : 'fail'}">
-          {form?.message}
-        </div>
-      {/if}
-      <div>
-        <label for="email">Email address</label>
-        <input
-          id="email"
-          name="email"
-          class="inputField"
-          type="email"
-          placeholder="Your email"
-          value={form?.email ?? ""}
-        />
-      </div>
-      {#if form?.errors?.email}
-        <span class="error flex items-center text-sm">
-          {form?.errors?.email}
-        </span>
-      {/if}
-      <div>
-        <button class="button primary block">
-          {loading ? "Loading" : "Send magic link"}
-        </button>
-      </div>
-    </div>
-  </form>
-  <h1>
-    <span class="welcome">
-      <picture>
-        <source srcset={welcome} type="image/webp" />
-        <img src={welcome_fallback} alt="Welcome" />
-      </picture>
-    </span>
-
-    to your new<br />SvelteKit app
-    <button class="btn btn-primary">Click me</button>
-  </h1>
   <!-- 
 	<ul>
 		{#each beans as bean}
 			<li>{JSON.stringify(bean)}</li>
 		{/each}
 	</ul> -->
-
-  <h2>
-    try editing <strong>src/routes/+page.svelte</strong>
-  </h2>
 </section>
-
-<style>
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 0.6;
-  }
-
-  h1 {
-    width: 100%;
-  }
-
-  .welcome {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding: 0 0 calc(100% * 495 / 2048) 0;
-  }
-
-  .welcome img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    display: block;
-  }
-</style>
