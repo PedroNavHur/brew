@@ -1,10 +1,3 @@
-// import type { PageServerLoad } from './$types'
-
-// export const load: PageServerLoad = async ({ locals: { supabase } }) => {
-//   const { data: beans } = await supabase.from('beans').select()
-//   return { beans: beans ?? [] }
-// }
-
 // src/routes/+page.server.ts
 import { fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";

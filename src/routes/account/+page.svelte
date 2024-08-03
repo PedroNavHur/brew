@@ -152,8 +152,8 @@
   {#if beans === null}
     <p>Add some coffee beans</p>
   {:else}
-    <div class="card overflow-x-auto bg-base-100 shadow-xl">
-      <table class="table">
+    <div class="card h-80 overflow-x-auto bg-base-100 shadow-xl">
+      <table class="table table-pin-rows">
         <!-- head -->
         <thead>
           <tr>
@@ -206,14 +206,6 @@
             </tr>
           {/each}
         </tbody>
-        <!-- foot -->
-        <tfoot>
-          <tr>
-            <th>Beans</th>
-            <th>Details</th>
-            <th>Weight</th>
-          </tr>
-        </tfoot>
       </table>
     </div>
   {/if}
